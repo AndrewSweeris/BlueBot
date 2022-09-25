@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://tilesets/block.tres" type="TileSet" id=1]
 [ext_resource path="res://tilesets/circle.tres" type="TileSet" id=2]
 [ext_resource path="res://tilesets/triangle.tres" type="TileSet" id=3]
 [ext_resource path="res://assets/character-card.png" type="Texture" id=4]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=5]
+[ext_resource path="res://assets/circle.png" type="Texture" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 7.0
@@ -97,19 +98,19 @@ tracks/0/keys = {
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 12, 12 )
 format = 1
-tile_data = PoolIntArray( -458750, 0, 0, -458749, 0, 0, -393215, 0, 0, -393214, 0, 0, -393213, 0, 0, -393212, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -327671, 0, 0, -327670, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, -262140, 0, 0, -262136, 0, 0, -262135, 0, 0, -262134, 0, 0, -262133, 0, 0 )
+tile_data = PoolIntArray( -458750, 0, 0, -458749, 0, 0, -393215, 0, 0, -393214, 0, 0, -393213, 0, 0, -393212, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -327671, 0, 0, -327670, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, -262140, 0, 0, -262136, 0, 0, -262135, 0, 0, -262134, 0, 0, -262133, 0, 0, -196606, 0, 0, -196605, 0, 0, -196599, 0, 0, -196598, 0, 0 )
 
 [node name="CurveTiles" type="TileMap" parent="."]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 12, 12 )
 format = 1
-tile_data = PoolIntArray( -458751, 0, 0, -458748, 1, 0 )
+tile_data = PoolIntArray( -458751, 0, 0, -458748, 1, 0, -196607, 2, 0, -196604, 3, 0 )
 
 [node name="TriangleTiles" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 12, 12 )
 format = 1
-tile_data = PoolIntArray( -327672, 0, 0, -327669, 1, 0 )
+tile_data = PoolIntArray( -327672, 0, 0, -327669, 1, 0, -196600, 3, 0, -196597, 2, 0 )
 
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 36, -92 )
@@ -130,6 +131,20 @@ anims/dead = SubResource( 4 )
 anims/moving = SubResource( 5 )
 anims/standing = SubResource( 6 )
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
+[node name="Shape" type="KinematicBody2D" parent="."]
+position = Vector2( 24, -143 )
+
+[node name="Camera2D" type="Camera2D" parent="Shape"]
+position = Vector2( 36, -92 )
+current = true
 zoom = Vector2( 0.2, 0.2 )
 smoothing_enabled = true
+
+[node name="Sprite" type="Sprite" parent="Shape"]
+position = Vector2( 38, -90 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 6 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shape"]
+position = Vector2( 37, -90 )
+scale = Vector2( 5, 5 )
