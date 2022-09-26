@@ -15,12 +15,6 @@ var motion = Vector2()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Sprite.rotation_degrees=0
-	var t = Timer.new()
-	t.set_wait_time(0.7)
-	t.set_one_shot(true)
-	self.add_child(t)
-	t.start()
-	yield(t, "timeout")
 	can_move=true
 
 # Handles physics
@@ -39,8 +33,9 @@ func _physics_process(delta):
 			$AnimationPlayer.play("moving")
 		else:
 			motion.x = lerp(motion.x,0,0.3)
-			$AnimationPlayer.play("standing")
 		motion.x = clamp(motion.x, -MAXSPEED, MAXSPEED)
+		if (motion.x<=5&&motion.x>=-5&&motion.y==0):
+			$AnimationPlayer.play("standing")
 		
 		if is_on_floor():
 			motion.y = 0;

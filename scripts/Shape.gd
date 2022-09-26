@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var SPEED = 40
+var SPEED = 70
 const UP = Vector2(0, -1)
 const IS_SHAPE = true
 var shapemotion = Vector2()
@@ -19,14 +19,7 @@ func _ready():
 
 func _physics_process(delta):
 	if is_on_ceiling()||is_on_floor()||is_on_wall():
-		$AnimationPlayer.play_backwards("Fade_In")
 		can_move=false
-		var t = Timer.new()
-		t.set_wait_time(0.9)
-		t.set_one_shot(true)
-		self.add_child(t)
-		t.start()
-		yield(t, "timeout")
 		get_tree().reload_current_scene()
 	if (can_move&&!is_on_ceiling()&&!is_on_floor()&&!is_on_wall()):
 		if Input.is_action_pressed("shapeRIGHT"):
